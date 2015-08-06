@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using HvN.BigHero.DAL.DataContext;
 using HvN.BigHero.DAL.Entities;
 using HvN.BigHero.DAL.Sql;
@@ -24,6 +25,7 @@ namespace ConsoleTest
                             Name = "Id",
                             Display = "Id",
                             DataType = ColumnType.Int,
+                            Order = 0,
                             IsPrimarykey = true
                         },
                         new Column
@@ -31,37 +33,41 @@ namespace ConsoleTest
                             Name = "Name",
                             Display = "Name",
                             DataType = ColumnType.VarChar,
-                            Size = 50
+                            Size = 50,
+                            Order = 1
                         },
                         new Column
                         {
                             Name = "DateOfBird",
                             Display = "Date of Bird",
                             DataType = ColumnType.DateTime,
-                            Nullable = true
+                            Nullable = true,
+                            Order = 2
                         }
                     }
                 };
-                var tableScript = SqlHelper.CreateTable(table);
+                var tableScript = SqlHelper.GetCreateTableStatement(table);
                 db.Tables.Add(table);
                 db.Database.ExecuteSqlCommand(tableScript);
                 db.SaveChanges();
 
-              
-               var data = new Dictionary<string, object>();
-                data.Add("Id", 1);
-                data.Add("Name", "Messi");
-                data.Add("DateOfBird", DateTime.Now);
-                var insert = SqlHelper.InsertData(table, data);
-                db.Database.ExecuteSqlCommand(insert);
+
+                var insert = SqlHelper.GetInsertStatement(table);
+                db.Database.ExecuteSqlCommand(insert, 
+                    new SqlParameter("@Name", "messi-zip"),
+                    new SqlParameter("@DateOfBird", DateTime.Now));
+                db.Database.ExecuteSqlCommand(insert,
+                    new SqlParameter("@Name", "messi-zip11"),
+                    new SqlParameter("@DateOfBird", DateTime.Now));
                 db.SaveChanges();
-                var updateData = new Dictionary<string, object>();
-                updateData.Add("Id", 1);
-                updateData.Add("Name", "Messi11");
-                updateData.Add("DateOfBird", DateTime.Now);
-                var update = SqlHelper.UpdatetData(table, updateData);
-                db.Database.ExecuteSqlCommand(update);
-                db.SaveChanges();
+
+                //var update = SqlHelper.GetUpdateStatement(table);
+                //object[] param = new object[3];
+                // db.Database.ExecuteSqlCommand(update,
+                //    new SqlParameter("@Id", 1),
+                //    new SqlParameter("@Name", "messi-zip-11"),
+                //    new SqlParameter("@DateOfBird", DateTime.Now));
+                //db.SaveChanges();
                 Console.WriteLine("");
 
                 //var sql = @"Update [User] SET FirstName = @FirstName WHERE Id = @Id";

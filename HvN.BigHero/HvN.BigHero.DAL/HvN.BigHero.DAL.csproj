@@ -50,6 +50,8 @@
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Column.cs" />
     <Compile Include="Entities\Table.cs" />
+    <Compile Include="Model\ColumnViewModel.cs" />
+    <Compile Include="Model\TableDetailViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IGenericRepository.cs" />
     <Compile Include="Repository\GenericRepository.cs" />

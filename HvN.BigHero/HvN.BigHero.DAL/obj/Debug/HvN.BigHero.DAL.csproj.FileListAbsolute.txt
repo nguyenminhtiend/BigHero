@@ -8,3 +8,13 @@ D:\Working\Self Study\HvN.BigHero\HvN.BigHero.DAL\bin\Debug\EntityFramework.SqlS
 D:\Working\Self Study\HvN.BigHero\HvN.BigHero.DAL\obj\Debug\HvN.BigHero.DAL.csprojResolveAssemblyReference.cache
 D:\Working\Self Study\HvN.BigHero\HvN.BigHero.DAL\obj\Debug\HvN.BigHero.DAL.dll
 D:\Working\Self Study\HvN.BigHero\HvN.BigHero.DAL\obj\Debug\HvN.BigHero.DAL.pdb
+D:\Working\NET\Projects\BigHero\HvN.BigHero\HvN.BigHero.DAL\bin\Debug\HvN.BigHero.DAL.dll.config
+D:\Working\NET\Projects\BigHero\HvN.BigHero\HvN.BigHero.DAL\bin\Debug\HvN.BigHero.DAL.dll
+D:\Working\NET\Projects\BigHero\HvN.BigHero\HvN.BigHero.DAL\bin\Debug\HvN.BigHero.DAL.pdb
+D:\Working\NET\Projects\BigHero\HvN.BigHero\HvN.BigHero.DAL\bin\Debug\EntityFramework.dll
+D:\Working\NET\Projects\BigHero\HvN.BigHero\HvN.BigHero.DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Working\NET\Projects\BigHero\HvN.BigHero\HvN.BigHero.DAL\bin\Debug\EntityFramework.xml
+D:\Working\NET\Projects\BigHero\HvN.BigHero\HvN.BigHero.DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Working\NET\Projects\BigHero\HvN.BigHero\HvN.BigHero.DAL\obj\Debug\HvN.BigHero.DAL.csprojResolveAssemblyReference.cache
+D:\Working\NET\Projects\BigHero\HvN.BigHero\HvN.BigHero.DAL\obj\Debug\HvN.BigHero.DAL.dll
+D:\Working\NET\Projects\BigHero\HvN.BigHero\HvN.BigHero.DAL\obj\Debug\HvN.BigHero.DAL.pdb

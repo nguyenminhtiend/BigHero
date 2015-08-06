@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace HvN.BigHero.Web
@@ -15,8 +11,8 @@ namespace HvN.BigHero.Web
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                url: "{controller}/{action}/{tableName}/{rowId}",
+                defaults: new { controller = "Table", action = "Create", tableName = UrlParameter.Optional, rowId = UrlParameter.Optional }
             );
         }
     }

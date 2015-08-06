@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using HvN.BigHero.DAL.Entities;
+using HvN.BigHero.DAL.Model;
 using HvN.BigHero.DAL.Utility;
 
 namespace HvN.BigHero.DAL.Sql
@@ -12,8 +13,9 @@ namespace HvN.BigHero.DAL.Sql
         public const string Nvarchar = "nvarchar({0})";
         public const string InsertStatement = "INSERT INTO {0}({1}) VALUES({2})";
         public const string UpdateStatement = "UPDATE {0} SET {1} WHERE {2}";
+        public const string SelectStatement = "SELECT{0} FROM {1}";
 
-        public static string CreateTable(Table table)
+        public static string GetCreateTableStatement(Table table)
         {
             string columns = string.Empty;
             foreach (var column in table.Columns)
@@ -39,7 +41,7 @@ namespace HvN.BigHero.DAL.Sql
             return string.Format(Table, table.Name, columns.Substring(0, columns.Length - 1));
         }
 
-        public static string InsertData(Table table, Dictionary<string, object> data)
+        public static string GetInsertStatement(Table table)
         {
             string columns = string.Empty;
             string values = string.Empty;
@@ -49,46 +51,39 @@ namespace HvN.BigHero.DAL.Sql
             foreach (var column in listColums)
             {
                 columns += column.Name + ",";
-                if (column.DataType == ColumnType.VarChar || column.DataType == ColumnType.DateTime)
-                {
-                    values += string.Format("'{0}',", data[column.Name]);
-                }
-                else
-                {
-                    values += string.Format("{0},", data[column.Name]);
-                }
-
+                values += string.Format("@{0},", column.Name);
             }
             return string.Format(InsertStatement, table.Name, columns.Substring(0, columns.Length - 1), values.Substring(0, values.Length - 1));
         }
 
-        public static string UpdatetData(Table table, Dictionary<string, object> data)
+        public static string GetUpdateStatement(Table table)
         {
             string columns = string.Empty;
-            string coditions = string.Empty;
+            string conditions = string.Empty;
             var listColums = table.IsIdentity ? table.Columns.Where(x => !x.IsPrimarykey).ToList() : table.Columns;
 
             foreach (var column in listColums)
             {
-                if (column.DataType == ColumnType.VarChar || column.DataType == ColumnType.DateTime)
-                {
-                    columns += string.Format("{0}='{1}',", column.Name, data[column.Name]);
-                }
-                else
-                {
-                    columns += string.Format("{0}={1},", column.Name, data[column.Name]);
-                }
-
+                columns += string.Format("{0}=@{0},", column.Name);
             }
             var primaryColumns = table.Columns.Where(x => x.IsPrimarykey).ToList();
 
             foreach (var column in primaryColumns)
             {
-                coditions += string.Format("{0}={1},", column.Name, data[column.Name]);
+                conditions += string.Format("{0}=@{0},", column.Name);
             }
 
-            return string.Format(UpdateStatement, table.Name, columns.Substring(0, columns.Length - 1), coditions.Substring(0, coditions.Length - 1));
+            return string.Format(UpdateStatement, table.Name, columns.Substring(0, columns.Length - 1), conditions.Substring(0, conditions.Length - 1));
         }
 
+        public static string GetSeleteStatement(List<ColumnViewModel> columnViewModels, string tableName)
+        {
+            string columns = string.Empty;
+            foreach (var columnViewModel in columnViewModels)
+            {
+                columns += string.Format(" {0},", columnViewModel.Name);
+            }
+            return string.Format(SelectStatement, columns.Substring(0, columns.Length - 1), tableName);
+        }
     }
 }

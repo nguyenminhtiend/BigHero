@@ -7,6 +7,7 @@ namespace HvN.BigHero.DAL.Entities
     {
         public string Name { get; set; }
         public string Display { get; set; }
+        public int Order { get; set; }
         public ColumnType DataType{get; set; }
         public int? Size { get; set; }
         public bool IsPrimarykey { get; set; }
