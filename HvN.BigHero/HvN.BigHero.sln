@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HvN.BigHero.Web", "HvN.BigHero.Web\HvN.BigHero.Web.csproj", "{83C7C2F3-C2A9-4229-81C3-42E2550ED0AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HvN.BigHero.DAL", "HvN.BigHero.DAL\HvN.BigHero.DAL.csproj", "{728B3EFA-18F7-46FA-80CE-872AD9468758}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{2C03C788-4D3A-4B7E-8A6A-C98784FA1EFD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83C7C2F3-C2A9-4229-81C3-42E2550ED0AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83C7C2F3-C2A9-4229-81C3-42E2550ED0AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83C7C2F3-C2A9-4229-81C3-42E2550ED0AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83C7C2F3-C2A9-4229-81C3-42E2550ED0AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{728B3EFA-18F7-46FA-80CE-872AD9468758}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{728B3EFA-18F7-46FA-80CE-872AD9468758}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{728B3EFA-18F7-46FA-80CE-872AD9468758}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{728B3EFA-18F7-46FA-80CE-872AD9468758}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C03C788-4D3A-4B7E-8A6A-C98784FA1EFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C03C788-4D3A-4B7E-8A6A-C98784FA1EFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C03C788-4D3A-4B7E-8A6A-C98784FA1EFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C03C788-4D3A-4B7E-8A6A-C98784FA1EFD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
