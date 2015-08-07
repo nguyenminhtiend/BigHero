@@ -73,6 +73,27 @@ namespace HvN.BigHero.DAL.Service
             return tableDetailViewModel;
         }
 
+        public RowDetailViewModel GetListColumnForAddNew(string tableName)
+        {
+            var listColumns = (from table in tableRepository.GetAll()
+                               join column in columnRepository.GetAll() on table.Id equals column.TableId
+                               where table.Name.Equals(tableName)
+                               orderby column.Order
+                               select new ColumnViewModel
+                               {
+                                   Name = column.Name,
+                                   Display = column.Display,
+                                   IsPrimaryKey = column.IsPrimarykey,
+                                   NullAble = column.Nullable
+                               }).ToList();
+            return new RowDetailViewModel
+            {
+                TableName = tableName,
+                PrimaryColumn = listColumns.FirstOrDefault(x => x.IsPrimaryKey),
+                Columns = listColumns.Where(x => !x.IsPrimaryKey).ToList()
+            };
+        }
+
         public void AddNewTable(Table table)
         {
             var tableScript = SqlHelper.GetCreateTableStatement(table);

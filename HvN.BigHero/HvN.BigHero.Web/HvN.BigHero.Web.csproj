@@ -168,6 +168,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Table\Create.cshtml" />
     <Content Include="Views\Table\Detail.cshtml" />
+    <Content Include="Views\Table\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HvN.BigHero.DAL\HvN.BigHero.DAL.csproj">

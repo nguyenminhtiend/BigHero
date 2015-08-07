@@ -26,5 +26,10 @@ namespace HvN.BigHero.Web.Controllers
             var tableDetailViewModel = tableService.GeTableDetailViewModel(tableName);
             return View(tableDetailViewModel);
         }
+        public ActionResult Add(string tableName)
+        {
+            var rowDetailViewModel = tableService.GetListColumnForAddNew(tableName);
+            return View(rowDetailViewModel);
+        }
     }
 }

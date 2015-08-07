@@ -1,0 +1,26 @@
+﻿@model HvN.BigHero.DAL.Model.RowDetailViewModel
+
+<h3><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add new record for @Model.TableName</h3>
+<hr>
+
+<form method="POST">
+    <input name="@Model.PrimaryColumn.Name" type="hidden" />
+    <div class="row">
+        @{
+            foreach (var column in @Model.Columns)
+            {
+                <div class="col-md-2 custom-row">
+                    <label class="@column.CssClass">@column.Display</label>
+                </div>
+                <div class="col-md-4 custom-row">
+                    <input type="text" name="@column.Name" class="form-control @column.CssClass" placeholder="Jane Doe">
+                </div>
+            }
+        }
+    </div>
+    <hr>
+    <div class="row custom-right">
+        <a class="btn btn-info"><span class=" glyphicon glyphicon-saved" aria-hidden="true"></span> Save</a>
+        <a class="btn btn-danger" href="/#employees">Cancel</a>
+    </div>
+</form>

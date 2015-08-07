@@ -51,6 +51,7 @@
     <Compile Include="Entities\Column.cs" />
     <Compile Include="Entities\Table.cs" />
     <Compile Include="Model\ColumnViewModel.cs" />
+    <Compile Include="Model\RowDetailViewModel.cs" />
     <Compile Include="Model\TableDetailViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IGenericRepository.cs" />
