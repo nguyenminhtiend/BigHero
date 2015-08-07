@@ -101,9 +101,10 @@ namespace HvN.BigHero.DAL.Service
             unitOfWork.Context.Database.ExecuteSqlCommand(tableScript);
             unitOfWork.Commit();
         }
-        public void InsertData(Table table, Dictionary<string, object> data)
+        public void InsertData(string table, Dictionary<string, object> data)
         {
-            ExecuteNonQuery(data, SqlHelper.GetInsertStatement(table));
+            var tableFull = tableRepository.GetItemsWithNavigation(x => x.Name.Equals(table), "Columns").FirstOrDefault();
+            ExecuteNonQuery(data, SqlHelper.GetInsertStatement(tableFull));
         }
         public void UpdateData(Table table, Dictionary<string, object> data)
         {
@@ -122,6 +123,8 @@ namespace HvN.BigHero.DAL.Service
             unitOfWork.Context.Database.ExecuteSqlCommand(sqlStatement, param);
             unitOfWork.Commit();
         }
+
+
 
     }
 }

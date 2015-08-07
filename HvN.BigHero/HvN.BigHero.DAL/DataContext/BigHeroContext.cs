@@ -12,7 +12,7 @@ namespace HvN.BigHero.DAL.DataContext
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;
             Configuration.AutoDetectChangesEnabled = false;
-            //Database.SetInitializer(new DropCreateDatabaseAlways<BigHeroContext>());
+            Database.SetInitializer(new BigHeroContextInititalizer());
         }
 
         public IDbSet<Table> Tables { get; set; }

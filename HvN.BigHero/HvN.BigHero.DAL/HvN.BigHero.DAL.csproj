@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext\BigHeroContext.cs" />
+    <Compile Include="DataContext\BigHeroContextInititalizer.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Column.cs" />
     <Compile Include="Entities\Table.cs" />

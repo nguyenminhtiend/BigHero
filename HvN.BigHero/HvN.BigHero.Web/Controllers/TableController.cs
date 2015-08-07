@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using HvN.BigHero.DAL.Service;
+using HvN.BigHero.Web.Helper;
 
 namespace HvN.BigHero.Web.Controllers
 {
@@ -13,7 +14,7 @@ namespace HvN.BigHero.Web.Controllers
 
         public ActionResult Create()
         {
-
+            
             return View();
         }
 
@@ -30,6 +31,13 @@ namespace HvN.BigHero.Web.Controllers
         {
             var rowDetailViewModel = tableService.GetListColumnForAddNew(tableName);
             return View(rowDetailViewModel);
+        }
+        [HttpPost]
+        public ActionResult Add()
+        {
+            var tableName = Request["TableName"];
+            tableService.InsertData(tableName, RequestCoverter.GetDataFromRequest(Request, Request["Columns"]));
+            return RedirectToAction("Detail", new {tableName });
         }
     }
 }

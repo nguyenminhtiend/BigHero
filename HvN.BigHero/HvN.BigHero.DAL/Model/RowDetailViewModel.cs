@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using HvN.BigHero.DAL.Entities;
+using System.Linq;
 
 namespace HvN.BigHero.DAL.Model
 {
@@ -8,5 +8,12 @@ namespace HvN.BigHero.DAL.Model
         public string TableName { get; set; }
         public ColumnViewModel PrimaryColumn { get; set; }
         public List<ColumnViewModel> Columns { get; set; }
+        public string StringColumns
+        {
+            get
+            {
+                return string.Join(",", Columns.Select(x => x.Name));
+            }
+        }
     }
 }

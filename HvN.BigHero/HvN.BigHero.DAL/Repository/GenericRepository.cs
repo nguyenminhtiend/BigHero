@@ -29,6 +29,17 @@ namespace HvN.BigHero.DAL.Repository
         {
             return dbSet.Where(predicate);
         }
+
+        public IQueryable<TEntity> GetItemsWithNavigation(Expression<Func<TEntity, bool>> predicate, params string[] navigationProperties)
+        {
+            var query = dbSet.AsQueryable();
+            foreach (var navigationProperty in navigationProperties)
+            {
+                query = query.Include(navigationProperty);
+            }
+            return query.Where(predicate);
+        }
+
         public void Add(TEntity entity)
         {
             dbSet.Add(entity);
