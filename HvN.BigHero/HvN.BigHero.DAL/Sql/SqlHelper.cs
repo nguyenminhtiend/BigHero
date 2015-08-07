@@ -14,6 +14,8 @@ namespace HvN.BigHero.DAL.Sql
         public const string InsertStatement = "INSERT INTO {0}({1}) VALUES({2})";
         public const string UpdateStatement = "UPDATE {0} SET {1} WHERE {2}";
         public const string SelectStatement = "SELECT{0} FROM {1}";
+        public const string SelectTopOneStatement = "SELECT TOP 1 {0} FROM {1} WHERE {2}";
+        public const string DeleteStatement = "DELETE FROM {0} WHERE {1}=@{1}";
 
         public static string GetCreateTableStatement(Table table)
         {
@@ -41,6 +43,22 @@ namespace HvN.BigHero.DAL.Sql
             return string.Format(Table, table.Name, columns.Substring(0, columns.Length - 1));
         }
 
+        public static string GetSelectTopOneStatement(Table table)
+        {
+            string columns = string.Empty;
+            string conditions = string.Empty;
+            foreach (var column in table.Columns)
+            {
+                columns += string.Format("{0},", column.Name);
+            }
+            var primaryColumns = table.Columns.Where(x => x.IsPrimarykey).ToList();
+
+            foreach (var column in primaryColumns)
+            {
+                conditions += string.Format("{0}=@{0},", column.Name);
+            }
+            return string.Format(SelectTopOneStatement, columns.Substring(0, columns.Length - 1), table.Name, conditions.Substring(0, conditions.Length - 1));
+        }
         public static string GetInsertStatement(Table table)
         {
             string columns = string.Empty;
@@ -76,6 +94,10 @@ namespace HvN.BigHero.DAL.Sql
             return string.Format(UpdateStatement, table.Name, columns.Substring(0, columns.Length - 1), conditions.Substring(0, conditions.Length - 1));
         }
 
+        public static string GetDeleteStatement(string tableName, string primaryColumn)
+        {
+            return string.Format(DeleteStatement, tableName, primaryColumn);
+        }
         public static string GetSeleteStatement(List<ColumnViewModel> columnViewModels, string tableName)
         {
             string columns = string.Empty;

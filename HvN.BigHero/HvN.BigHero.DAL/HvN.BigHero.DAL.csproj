@@ -54,6 +54,7 @@
     <Compile Include="Model\ColumnViewModel.cs" />
     <Compile Include="Model\RowDetailViewModel.cs" />
     <Compile Include="Model\TableDetailViewModel.cs" />
+    <Compile Include="MyException\MyException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IGenericRepository.cs" />
     <Compile Include="Repository\GenericRepository.cs" />

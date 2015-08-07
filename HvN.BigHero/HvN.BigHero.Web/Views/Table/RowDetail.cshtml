@@ -1,0 +1,27 @@
+﻿@model HvN.BigHero.DAL.Model.RowDetailViewModel
+    
+@using (Html.BeginForm("Save", "Table", FormMethod.Post, new {id = "saveRecord-form"}))
+{
+    <input name="TableName" value="@Model.TableName" type="hidden" />
+    <input name="PrimaryKey" value="@Model.PrimaryColumn.Name" type="hidden" />
+    <input name="@Model.PrimaryColumn.Name" value="@Model.PrimaryColumn.Value" type="hidden" />
+    <input name="Columns" value="@Model.StringColumns" type="hidden" />
+    <div class="row">
+        @{
+            foreach (var column in @Model.Columns)
+            {
+                <div class="col-md-2 custom-row">
+                    <label class="@column.CssClass">@column.Display</label>
+                </div>
+                <div class="col-md-4 custom-row">
+                    <input type="text" name="@column.Name" value="@column.Value" class="form-control @column.CssClass @column.DatePickerClass" placeholder="@column.Display">
+                </div>
+            }
+        }
+    </div>
+    <hr>
+    <div class="row custom-right">
+        <a class="btn btn-info" id="saveRecord"><span class=" glyphicon glyphicon-saved" aria-hidden="true"></span> Save</a>
+        <a class="btn btn-danger" href="/Table/Detail/@Model.TableName">Cancel</a>
+    </div>
+}
