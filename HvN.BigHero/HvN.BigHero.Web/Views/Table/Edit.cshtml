@@ -1,0 +1,10 @@
+﻿@model HvN.BigHero.DAL.Model.RowDetailViewModel
+
+<h3><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit record for @Model.TableName</h3>
+<hr>
+@Html.Partial("RowDetail", Model);
+
+@section scripts
+{
+    <script src="~/Scripts/Table/tableRecord.js"></script>
+}

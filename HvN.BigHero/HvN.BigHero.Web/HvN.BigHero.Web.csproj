@@ -176,10 +176,10 @@
     <Content Include="Views\Table\Create.cshtml" />
     <Content Include="Views\Table\Detail.cshtml" />
     <Content Include="Views\Table\Add.cshtml" />
-    <Content Include="Views\Table\Edit.cshtml" />
     <Content Include="Views\Table\RowDetail.cshtml" />
     <Content Include="Views\Table\TableDetail.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Table\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HvN.BigHero.DAL\HvN.BigHero.DAL.csproj">

@@ -35,8 +35,8 @@ namespace HvN.BigHero.DAL.DataContext
                         },
                         new Column
                         {
-                            Name = "DateOfBird",
-                            Display = "Date of Bird",
+                            Name = "DateOfBirth",
+                            Display = "Date of Birth",
                             DataType = ColumnType.DateTime,
                             Nullable = true
                         },
@@ -66,7 +66,7 @@ namespace HvN.BigHero.DAL.DataContext
                 var insert = SqlHelper.GetInsertStatement(table);
                 context.Database.ExecuteSqlCommand(insert,
                           new SqlParameter("@Name", "Lionel Messi"),
-                          new SqlParameter("@DateOfBird", DateTime.Now),
+                          new SqlParameter("@DateOfBirth", DateTime.Now),
                           new SqlParameter("@Phone", "0966638355"),
                           new SqlParameter("@Email", "nguyenminhtiend@gmail.com"));
                 context.SaveChanges();
