@@ -1,6 +1,7 @@
-﻿@model HvN.BigHero.DAL.Model.RowDetailViewModel
-    
-@using (Html.BeginForm("Save", "Table", FormMethod.Post, new {id = "saveRecord-form"}))
+﻿@using HvN.BigHero.Web.Helper
+@model HvN.BigHero.DAL.Model.RowDetailViewModel
+
+@using (Html.BeginForm("Save", "Table", FormMethod.Post, new { id = "saveRecord-form" }))
 {
     <input name="TableName" value="@Model.TableName" type="hidden" />
     <input name="PrimaryKey" value="@Model.PrimaryColumn.Name" type="hidden" />
@@ -11,17 +12,17 @@
             foreach (var column in @Model.Columns)
             {
                 <div class="col-md-2 custom-row">
-                    <label class="@column.CssClass">@column.Display</label>
+                    @Html.LabelForColumn(column)
                 </div>
                 <div class="col-md-4 custom-row">
-                    <input type="text" name="@column.Name" value="@column.Value" class="form-control @column.CssClass @column.DatePickerClass" placeholder="@column.Display">
+                    @Html.EditorForColumn(column, "form-control")
                 </div>
             }
         }
     </div>
     <hr>
-    <div class="row custom-right">
-        <a class="btn btn-info" id="saveRecord"><span class=" glyphicon glyphicon-saved" aria-hidden="true"></span> Save</a>
-        <a class="btn btn-danger" href="/Table/Detail/@Model.TableName">Cancel</a>
+            <div class="row custom-right">
+                <button class="btn btn-info" id="saveRecord"><span class=" glyphicon glyphicon-saved" aria-hidden="true"></span> Save</button>
+                @Html.ActionLink("Cancel", "Detail", new { @tableName = Model.TableName }, new {@class = "btn btn-danger" })
     </div>
-}
+            }

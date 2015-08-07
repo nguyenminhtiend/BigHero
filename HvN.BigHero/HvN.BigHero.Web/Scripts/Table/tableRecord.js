@@ -7,10 +7,19 @@ var tableRecord = (function (module, undefined) {
 
     module.init = function () {
         $('.datetimepicker').datetimepicker({
-            format: 'DD/MM/YYYY'
+            format: 'MM/DD/YYYY'
         });
         $('#saveRecord').click(function () {
             $('#saveRecord-form').submit();
+        });
+        $("input.mandatory").blur(function () {
+            var isDiable = false;
+            $("input.mandatory").each(function(index) {
+               if ($.trim($(this).val()) === '') {
+                   isDiable = true;
+               }
+            });
+            $('#saveRecord').prop('disabled', isDiable);
         });
     }
 
@@ -21,7 +30,7 @@ var tableRecord = (function (module, undefined) {
             $.ajax({
                 url: '/Table/DeleteRecord',
                 type: 'POST',
-                data: {tableName: tableName, primaryColumn: primaryColumn, rowId: rowId},
+                data: { tableName: tableName, primaryColumn: primaryColumn, rowId: rowId },
                 success: function (data) {
                     reloadTable(tableName);
                 },
@@ -30,7 +39,7 @@ var tableRecord = (function (module, undefined) {
                 }
             });
         });
-       
+
     }
 
     function reloadTable(tableName) {

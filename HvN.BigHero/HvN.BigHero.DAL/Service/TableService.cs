@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -8,6 +9,7 @@ using HvN.BigHero.DAL.MyException;
 using HvN.BigHero.DAL.Repository;
 using HvN.BigHero.DAL.Sql;
 using HvN.BigHero.DAL.UnitOfWork;
+using HvN.BigHero.DAL.Utility;
 
 namespace HvN.BigHero.DAL.Service
 {
@@ -35,11 +37,12 @@ namespace HvN.BigHero.DAL.Service
                                {
                                    Display = column.Display,
                                    Name = column.Name,
-                                   IsPrimaryKey = column.IsPrimarykey
+                                   IsPrimaryKey = column.IsPrimarykey,
+                                   DataType = column.DataType
                                }).ToList();
             if (!listColumns.Any())
             {
-                throw  new NotFoundException();
+                throw new NotFoundException();
             }
             tableDetailViewModel.Columns = listColumns.Where(x => !x.IsPrimaryKey).ToList();
             var primaryColumn = listColumns.FirstOrDefault(x => x.IsPrimaryKey);
@@ -70,7 +73,16 @@ namespace HvN.BigHero.DAL.Service
                 var row = new Dictionary<string, object>();
                 foreach (var columnViewModel in listColumns)
                 {
-                    row.Add(columnViewModel.Name, dataRow[columnViewModel.Name]);
+                    if (columnViewModel.DataType == ColumnType.DateTime)
+                    {
+                        var datetime = (DateTime)dataRow[columnViewModel.Name];
+                        row.Add(columnViewModel.Name, datetime.ToString("MM/dd/yyyy"));
+                    }
+                    else
+                    {
+                        row.Add(columnViewModel.Name, dataRow[columnViewModel.Name]);
+                    }
+
                 }
                 data.Add(row);
             }
@@ -90,7 +102,8 @@ namespace HvN.BigHero.DAL.Service
                                    Display = column.Display,
                                    IsPrimaryKey = column.IsPrimarykey,
                                    NullAble = column.Nullable,
-                                   DataType = column.DataType
+                                   DataType = column.DataType,
+                                   Size = column.Size
                                }).ToList();
             if (!listColumns.Any())
             {
@@ -153,6 +166,7 @@ namespace HvN.BigHero.DAL.Service
                     Name = column.Name,
                     NullAble = column.Nullable,
                     DataType = column.DataType,
+                    Size = column.Size,
                     Value = dataRow[column.Name]
                 });
             }

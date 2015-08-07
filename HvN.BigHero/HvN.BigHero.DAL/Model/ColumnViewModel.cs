@@ -9,21 +9,8 @@ namespace HvN.BigHero.DAL.Model
         public bool IsPrimaryKey { get; set; }
         public bool NullAble { get; set; }
         public ColumnType DataType { get; set; }
+        public int? Size { get; set; }
         public object Value { get; set; }
-        public string CssClass
-        {
-            get
-            {
-                return NullAble ? string.Empty : "mandatory";
-            }
-        }
-
-        public string DatePickerClass
-        {
-            get
-            {
-                return DataType == ColumnType.DateTime ? "datetimepicker" : string.Empty;
-            }
-        }
+        
     }
 }
