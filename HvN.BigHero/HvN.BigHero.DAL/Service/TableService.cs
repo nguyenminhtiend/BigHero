@@ -185,6 +185,13 @@ namespace HvN.BigHero.DAL.Service
 
         public void AddNewTable(Table table)
         {
+            table.Columns.Add(new Column
+            {
+                Name = "Id",
+                Display = "Id",
+                DataType = ColumnType.Int,
+                IsPrimarykey = true
+            });
             var tableScript = SqlHelper.GetCreateTableStatement(table);
             tableRepository.Add(table);
             unitOfWork.Context.Database.ExecuteSqlCommand(tableScript);
@@ -208,6 +215,11 @@ namespace HvN.BigHero.DAL.Service
             unitOfWork.Commit();
         }
 
+        public List<string> GetTableMenu()
+        {
+            return tableRepository.GetAll().Select(x => x.Name).ToList();
+        }
+
         private void ExecuteNonQuery(Dictionary<string, object> data, string sqlStatement)
         {
             var param = new object[data.Count];
@@ -220,8 +232,14 @@ namespace HvN.BigHero.DAL.Service
             unitOfWork.Context.Database.ExecuteSqlCommand(sqlStatement, param);
             unitOfWork.Commit();
         }
-
-
-
+        public bool CheckExistTable(string tableName)
+        {
+            if (tableName == null)
+            {
+                throw new ArgumentException("tableName");
+            }
+            var table = tableRepository.GetAll().SingleOrDefault(x => x.Name.Equals(tableName));
+            return table != null;
+        }
     }
 }

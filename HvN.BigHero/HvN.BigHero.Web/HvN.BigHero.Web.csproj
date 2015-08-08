@@ -141,8 +141,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-table.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\loading.gif" />
+    <Content Include="Content\img\valid.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -154,12 +157,14 @@
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap-table.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Table\createTable.js" />
     <Content Include="Scripts\Table\tableRecord.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -177,10 +182,12 @@
     <Content Include="Views\Table\Create.cshtml" />
     <Content Include="Views\Table\Detail.cshtml" />
     <Content Include="Views\Table\Add.cshtml" />
-    <Content Include="Views\Table\RowDetail.cshtml" />
-    <Content Include="Views\Table\TableDetail.cshtml" />
+    <Content Include="Views\Table\_RowDetail.cshtml" />
+    <Content Include="Views\Table\_TableDetail.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Table\Edit.cshtml" />
+    <Content Include="Views\Table\_MenuTable.cshtml" />
+    <Content Include="Views\Table\_PopupColumn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HvN.BigHero.DAL\HvN.BigHero.DAL.csproj">

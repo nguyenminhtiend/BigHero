@@ -12,14 +12,14 @@ namespace HvN.BigHero.Web.Controllers
             {
                 filterContext.Result = new RedirectResult("~/Error/NotFound");
             }
-            else if (filterContext.Exception is InternalServerException)
-            {
-                filterContext.Result = new RedirectResult("~/Error/ServerError");
-            }
-            else
-            {
-                filterContext.Result = new RedirectResult("~/Error/ServerError");
-            }
+            //else if (filterContext.Exception is InternalServerException)
+            //{
+            //    filterContext.Result = new RedirectResult("~/Error/ServerError");
+            //}
+            //else
+            //{
+            //    filterContext.Result = new RedirectResult("~/Error/ServerError");
+            //}
         }
     }
 }

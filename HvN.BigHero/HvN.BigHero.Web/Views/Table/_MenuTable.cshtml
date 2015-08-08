@@ -1,0 +1,10 @@
+﻿@model List<string>
+
+@{
+    foreach (var menu in Model)
+    {
+        <li>
+            @Html.ActionLink(menu, "Detail", new { tableName = menu })
+        </li>
+    }
+}

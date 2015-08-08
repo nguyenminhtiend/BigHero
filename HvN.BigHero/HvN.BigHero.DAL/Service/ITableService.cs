@@ -12,7 +12,8 @@ namespace HvN.BigHero.DAL.Service
         void AddNewTable(Table table);
         void InsertData(string tableName, Dictionary<string, object> data);
         void UpdateData(string tableName, Dictionary<string, object> data);
-
         void DeleteData(string tableName, string primaryColumn, string rowId);
+        List<string> GetTableMenu();
+        bool CheckExistTable(string tableName);
     }
 }

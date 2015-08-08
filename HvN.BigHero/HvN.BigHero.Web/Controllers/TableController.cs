@@ -1,4 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using HvN.BigHero.DAL.Entities;
 using HvN.BigHero.DAL.Service;
 using HvN.BigHero.Web.Helper;
 
@@ -41,7 +44,7 @@ namespace HvN.BigHero.Web.Controllers
         public ActionResult GetTableDetail(string tableName)
         {
             var tableDetailViewModel = tableService.GeTableDetailViewModel(tableName);
-            return PartialView("TableDetail", tableDetailViewModel);
+            return PartialView("_TableDetail", tableDetailViewModel);
         }
 
         [HttpPost]
@@ -59,6 +62,26 @@ namespace HvN.BigHero.Web.Controllers
                 tableService.UpdateData(tableName, data);
             }
             return RedirectToAction("Detail", new {tableName });
+        }
+
+        public ActionResult GetMenuTable()
+        {
+            return PartialView("_MenuTable", tableService.GetTableMenu());
+        }
+        [HttpPost]
+        public ActionResult CheckExistTable(string tableName)
+        {
+            var result = tableService.CheckExistTable(tableName);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult CreateTable(string tableName, string columns)
+        {
+            var lst = new JavaScriptSerializer().Deserialize<List<Column>>(columns);
+            var saveTable = new Table { Name = tableName, IsIdentity = true, Columns = lst };
+            tableService.AddNewTable(saveTable);
+            return RedirectToAction("Detail", new { tableName });
+
         }
     }
 }
