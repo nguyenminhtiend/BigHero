@@ -82,7 +82,6 @@ namespace HvN.BigHero.DAL.Service
                     {
                         row.Add(columnViewModel.Name, dataRow[columnViewModel.Name]);
                     }
-
                 }
                 data.Add(row);
             }
@@ -199,13 +198,11 @@ namespace HvN.BigHero.DAL.Service
         }
         public void InsertData(string tableName, Dictionary<string, object> data)
         {
-            var table = tableRepository.GetItemsWithNavigation(x => x.Name.Equals(tableName), "Columns").FirstOrDefault();
-            ExecuteNonQuery(data, SqlHelper.GetInsertStatement(table));
+            ExecuteNonQuery(tableName, data, true);
         }
         public void UpdateData(string tableName, Dictionary<string, object> data)
         {
-            var table = tableRepository.GetItemsWithNavigation(x => x.Name.Equals(tableName), "Columns").FirstOrDefault();
-            ExecuteNonQuery(data, SqlHelper.GetUpdateStatement(table));
+            ExecuteNonQuery(tableName, data);
         }
 
         public void DeleteData(string tableName, string primaryColumn, string rowId)
@@ -220,8 +217,23 @@ namespace HvN.BigHero.DAL.Service
             return tableRepository.GetAll().Select(x => x.Name).ToList();
         }
 
-        private void ExecuteNonQuery(Dictionary<string, object> data, string sqlStatement)
+        private void ExecuteNonQuery(string talbeName, Dictionary<string, object> data, bool isNew = false)
         {
+            var table = tableRepository.GetItemsWithNavigation(x => x.Name.Equals(talbeName), "Columns").FirstOrDefault();
+            foreach (var column in table.Columns.Where(x => x.DataType == ColumnType.Bit))
+            {
+                if (data[column.Name] != null)
+                {
+                    data[column.Name] = true;
+                }
+                else
+                {
+                    data[column.Name] = false;
+                }
+            }
+
+            string sqlStatement = isNew ? SqlHelper.GetInsertStatement(table) : SqlHelper.GetUpdateStatement(table);
+
             var param = new object[data.Count];
             int i = 0;
             foreach (var item in data)

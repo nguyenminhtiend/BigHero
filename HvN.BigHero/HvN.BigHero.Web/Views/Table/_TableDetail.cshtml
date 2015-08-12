@@ -1,4 +1,5 @@
-﻿@model HvN.BigHero.DAL.Model.TableDetailViewModel
+﻿@using HvN.BigHero.DAL.Utility
+@model HvN.BigHero.DAL.Model.TableDetailViewModel
 
 <table class="table table-striped table-hover table-bordered">
     <thead>
@@ -20,7 +21,21 @@
                 @{
                     foreach (var column in Model.Columns.Where(x => !x.IsPrimaryKey))
                     {
-                        <td>@row[column.Name]</td>
+                        if (column.DataType == ColumnType.Bit)
+                        {
+                            if ((bool)row[column.Name])
+                            {
+                                <td><input type="checkbox" disabled="disabled" checked="checked" /></td>
+                            }
+                            else
+                            {
+                                <td><input type="checkbox" disabled="disabled" /></td>
+                            }
+                        }
+                        else
+                        {
+                            <td>@row[column.Name]</td>
+                        }
                     }
                     <td class="text-center">
                         <a class="btn btn-primary btn-xs" href="/Table/Edit/@Model.TableName/@row[Model.PrimaryColumn]">
@@ -32,19 +47,19 @@
                     </td>
                 }
             </tr>
-        }
+                    }
     </tbody>
     <tfoot>
-    <tr>
-        @if (Model.ContainRecord)
-        {
-            <td colspan="@Model.TotalColumn">Total record: @Model.TotalRecord</td>
-        }
-        else
-        {
-            <td class="text-center" colspan="@Model.TotalColumn">No record found!</td>
-        }
+        <tr>
+            @if (Model.ContainRecord)
+            {
+                <td colspan="@Model.TotalColumn">Total record: @Model.TotalRecord</td>
+            }
+            else
+            {
+                <td class="text-center" colspan="@Model.TotalColumn">No record found!</td>
+            }
 
-    </tr>
+        </tr>
     </tfoot>
 </table>

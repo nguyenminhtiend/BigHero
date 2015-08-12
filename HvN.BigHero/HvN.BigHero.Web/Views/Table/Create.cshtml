@@ -23,17 +23,24 @@
 <table class="table table-striped table-hover table-bordered" id="tblColumns">
     <thead>
         <tr>
-            <th data-field="name">Column Name</th>
+            <th data-field="name" data-formatter="nameFormatter" data-events="operateEvents">Column Name</th>
             <th data-field="display">Display Name</th>
             <th data-field="datatype">Data Type</th>
             <th data-field="size">Size</th>
-            <th data-field="nullable" data-checkbox="false">Allows Null</th>
+            <th data-field="nullable" data-checkbox="true">Allows Null</th>
+            <th data-checkbox="true">Delete</th>
         </tr>
     </thead>
 </table>
 <div class="row custom-row">
-    <button type="button" class="btn btn-primary" id="AddColumn">Add Column</button>
-    <button type="button" class="btn btn-primary" id="saveTable">Save</button>
+    <div class="col-md-10">
+        <button type="button" class="btn btn-primary" id="AddColumn">Add Column</button>
+        <button type="button" class="btn btn-primary" id="saveTable">Save</button>
+    </div>
+    <div class="col-md-2 custom-right">
+        <button type="button" class="btn btn-primary" id="delColumn">Delete</button>    
+    </div>
+    
 </div>
 
 @Html.Partial("_PopupColumn")

@@ -35,31 +35,51 @@ namespace HvN.BigHero.Web.Helper
                 builder.AddCssClass("mandatory");
             }
             builder.SetInnerText(columnViewModel.Display + " :");
-            
+
             return MvcHtmlString.Create(builder.ToString(TagRenderMode.Normal));
         }
         public static MvcHtmlString EditorForColumn(this HtmlHelper htmlHelper, ColumnViewModel columnViewModel, string css = "")
         {
             var builder = new TagBuilder("input");
             builder.MergeAttribute("name", columnViewModel.Name);
-            if (columnViewModel.Value != null)
+
+            if (columnViewModel.DataType == ColumnType.Bit)
             {
-                builder.MergeAttribute("value", columnViewModel.Value.ToString());
+                builder.MergeAttribute("type", "checkbox");
+                if (columnViewModel.Value != null)
+                {
+                    if ((bool) columnViewModel.Value)
+                    {
+                        builder.MergeAttribute("checked", "checked");
+                    }
+                }
             }
-            string cssClass = css;
-            if (!columnViewModel.NullAble)
+            else
             {
-                cssClass += " mandatory";
-            }
-            if (columnViewModel.DataType == ColumnType.DateTime)
-            {
-                cssClass += " datetimepicker";
-            }
-            builder.AddCssClass(cssClass);
-            builder.MergeAttribute("placeholder", columnViewModel.Display);
-            if (columnViewModel.Size.HasValue)
-            {
-                builder.MergeAttribute("maxlength", columnViewModel.Size.Value.ToString());
+                if (columnViewModel.Value != null)
+                {
+                    builder.MergeAttribute("value", columnViewModel.Value.ToString());
+                }
+                builder.MergeAttribute("placeholder", columnViewModel.Display);
+                if (columnViewModel.Size.HasValue)
+                {
+                    builder.MergeAttribute("maxlength", columnViewModel.Size.Value.ToString());
+                }
+
+                string cssClass = css;
+                if (!columnViewModel.NullAble)
+                {
+                    cssClass += " mandatory";
+                }
+                if (columnViewModel.DataType == ColumnType.DateTime)
+                {
+                    cssClass += " datetimepicker";
+                }
+                if (columnViewModel.DataType == ColumnType.Int)
+                {
+                    cssClass += " numeric";
+                }
+                builder.AddCssClass(cssClass);
             }
             return MvcHtmlString.Create(builder.ToString(TagRenderMode.SelfClosing));
         }

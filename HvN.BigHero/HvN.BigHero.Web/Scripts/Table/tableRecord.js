@@ -21,6 +21,9 @@ var tableRecord = (function (module, undefined) {
             });
             $('#saveRecord').prop('disabled', isDiable);
         });
+        $('.numeric').on('input', function (event) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
     }
 
     module.deleteRow = function (tableName, primaryColumn, rowId) {
